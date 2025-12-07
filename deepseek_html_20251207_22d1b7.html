@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D'Schurros | Churros Artesanais</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FF6B35;
+            --secondary-color: #FFA500;
+            --accent-color: #FFE5B4;
+            --light-color: #FFF9F0;
+            --dark-color: #2C1810;
+            --text-color: #333333;
+            --text-light: #777777;
+            --bg-color: #FFFFFF;
+            --card-color: #FFFFFF;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --border-radius: 16px;
+        }
+
+        .dark-mode {
+            --primary-color: #FF8C42;
+            --secondary-color: #FFB74D;
+            --accent-color: #5D4037;
+            --light-color: #121212;
+            --dark-color: #FFE5B4;
+            --text-color: #F5F5F5;
+            --text-light: #AAAAAA;
+            --bg-color: #1A1A1A;
+            --card-color: #242424;
+            --shadow: rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-color);
+            box-shadow: 0 4px 20px var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            background-color: rgba(var(--bg-color-rgb), 0.95);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo-icon {
+            color: var(--primary-color);
+            font-size: 32px;
+            transition: var(--transition);
+        }
+
+        .logo-text {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text span {
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 16px;
+            padding: 8px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+            border-radius: 1px;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: var(--text-color);
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+            background-color: var(--accent-color);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: rotate(15deg);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 26px;
+            color: var(--text-color);
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+            background-color: var(--accent-color);
+        }
+
+        .mobile-menu-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, transparent 70%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 70% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+
+        .hero-text {
+            flex: 1;
+            animation: fadeInUp 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+            animation-delay: 0.2s;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--text-color);
+        }
+
+        .hero-title span {
+            color: var(--primary-color);
+            display: block;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 36px;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+            font-size: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            animation: fadeInRight 1s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+            animation-delay: 0.4s;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px var(--shadow);
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: var(--transition);
+        }
+
+        .hero-image img:hover {
+            transform: perspective(1000px) rotateY(0deg) scale(1.02);
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 100px 0;
+            background-color: var(--light-color);
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .gallery-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 12px 24px var(--shadow);
+            transition: var(--transition);
+            background-color: var(--card-color);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+
+        .gallery-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px var(--shadow);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+
+        .gallery-info {
+            padding: 25px;
+        }
+
+        .gallery-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .gallery-info p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Recommendations Section */
+        .recommendations {
+            padding: 100px 0;
+        }
+
+        .recommendations-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        .recommendation-card {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 12px 24px var(--shadow);
+            transition: var(--transition);
+            padding: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            border: 1px solid rgba(var(--primary-color-rgb), 0.1);
+        }
+
+        .recommendation-card:nth-child(1) { animation-delay: 0.1s; }
+        .recommendation-card:nth-child(2) { animation-delay: 0.2s; }
+        .recommendation-card:nth-child(3) { animation-delay: 0.3s; }
+        .recommendation-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .recommendation-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px var(--shadow);
+            border-color: rgba(var(--primary-color-rgb), 0.3);
+        }
+
+        .recommendation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .recommendation-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-color);
+            line-height: 1.3;
+        }
+
+        .stars {
+            color: #FFD700;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .stars span {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-left: 8px;
+            font-weight: 500;
+        }
+
+        .recommendation-desc {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Info Panel Fixo */
+        .info-panel {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            width: 320px;
+            z-index: 1000;
+            overflow: hidden;
+            transform: translateY(100px) scale(0.9);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 1px solid rgba(var(--primary-color-rgb), 0.15);
+            visibility: hidden;
+        }
+
+        .info-panel.visible {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .panel-header {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-header h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .close-panel {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .close-panel:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .panel-content {
+            padding: 25px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(var(--text-color-rgb), 0.1);
+            transition: var(--transition);
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .info-item:hover {
+            transform: translateX(5px);
+        }
+
+        .info-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: white;
+            font-size: 20px;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .info-item:hover .info-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .info-text h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        .info-text p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .open-panel-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            z-index: 999;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: none;
+            animation: pulse 2s infinite;
+        }
+
+        .open-panel-btn:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 12px 30px rgba(255, 107, 53, 0.6);
+            animation: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: 80px 0 30px;
+            transition: var(--transition);
+        }
+
+        .dark-mode footer {
+            background-color: #2D2D2D;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 25px;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-logo:hover {
+            transform: translateY(-3px);
+        }
+
+        .footer-logo span {
+            color: var(--secondary-color);
+        }
+
+        .footer-about p {
+            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .footer-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            bottom: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.85);
+            transition: var(--transition);
+        }
+
+        .contact-info li:hover {
+            transform: translateX(5px);
+        }
+
+        .contact-info i {
+            color: var(--primary-color);
+            margin-right: 15px;
+            font-size: 20px;
+            margin-top: 3px;
+            min-width: 20px;
+        }
+
+        .contact-info a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: var(--transition);
+            border-bottom: 1px dotted transparent;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transform: translateY(-5px) rotate(5deg);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            }
+            50% {
+                box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
+            }
+            100% {
+                box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 30px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 50px;
+            }
+
+            .hero-subtitle {
+                margin: 0 auto 36px;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-image img {
+                max-width: 90%;
+                transform: none;
+            }
+
+            .info-panel {
+                width: 300px;
+                right: 20px;
+                bottom: 20px;
+            }
+            
+            .open-panel-btn {
+                right: 20px;
+                bottom: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--card-color);
+                box-shadow: 0 15px 30px var(--shadow);
+                padding: 30px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                z-index: 999;
+                border-radius: 0 0 20px 20px;
+            }
+
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav a {
+                font-size: 18px;
+                padding: 12px 0;
+                display: block;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero {
+                padding: 130px 0 80px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+
+            .gallery, .recommendations {
+                padding: 80px 0;
+            }
+
+            .gallery-container,
+            .recommendations-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .info-panel {
+                width: calc(100% - 40px);
+                right: 20px;
+                bottom: 100px;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .open-panel-btn {
+                right: 20px;
+                bottom: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 120px 0 60px;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                padding: 14px 28px;
+                font-size: 15px;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .info-panel {
+                bottom: 110px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 24px;
+            }
+
+            .logo-icon {
+                font-size: 28px;
+            }
+
+            .hero-title {
+                font-size: 1.9rem;
+            }
+
+            .info-panel {
+                width: calc(100% - 30px);
+                right: 15px;
+            }
+
+            .open-panel-btn {
+                width: 56px;
+                height: 56px;
+                font-size: 24px;
+                right: 15px;
+                bottom: 15px;
+            }
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection color */
+        ::selection {
+            background-color: rgba(255, 107, 53, 0.3);
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cookie-bite"></i>
+                </div>
+                <div class="logo-text">D'<span>Schurros</span></div>
+            </a>
+
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#gallery">Produtos</a></li>
+                    <li><a href="#recommendations">Recomendações</a></li>
+                    <li><a href="#contacts">Contato</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Alternar modo escuro/claro">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Churros Artesanais <span>que Derretem na Boca</span></h1>
+                <p class="hero-subtitle">Experimente nossos churros feitos com ingredientes selecionados e receitas tradicionais. Crocantes por fora, macios por dentro e recheados com o melhor doce de leite.</p>
+                <a href="#gallery" class="btn">Conheça Nossos Produtos <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="hero-image">
+                <img src="https://anamariareceitas.com.br/wp-content/uploads/2024/06/6022-1-768x512.jpg" alt="Churros deliciosos de doce de leite">
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Produtos</h2>
+            </div>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="https://anamariareceitas.com.br/wp-content/uploads/2024/06/6022-1-768x512.jpg" alt="Churros de Doce de Leite" class="gallery-img">
+                    <div class="gallery-info">
+                        <h3>Churros de Doce de Leite</h3>
+                        <p>Nossa especialidade! Churros crocantes recheados com doce de leite cremoso e caseiro, finalizados com açúcar e canela.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://phygital-files.mercafacil.com/mercadobahniuk-bucket/uploads/produto/churros_qualisse_70g_ab1f2fa2-3eaf-4680-952a-def6a4e3d93b.jpg" alt="Churros Qualitá" class="gallery-img">
+                    <div class="gallery-info">
+                        <h3>Churros Qualitá</h3>
+                        <p>Churros de alta qualidade, feito com ingredientes selecionados. Perfeito para quem busca um sabor premium e textura única.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pastel" class="gallery-img">
+                    <div class="gallery-info">
+                        <h3>Pastel Crocante</h3>
+                        <p>Pastel frito na hora, com massa fina e crocante. Disponível em diversos sabores doces e salgados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <section class="recommendations" id="recommendations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mais Pedidos</h2>
+            </div>
+            <div class="recommendations-container">
+                <div class="recommendation-card">
+                    <div class="recommendation-header">
+                        <h3 class="recommendation-title">Churros de Doce de Leite</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <span>(248)</span>
+                        </div>
+                    </div>
+                    <p class="recommendation-desc">O mais pedido da casa! Churros crocante por fora, macio por dentro e recheado com doce de leite artesanal. Perfeito para quem ama o clássico.</p>
+                </div>
+                <div class="recommendation-card">
+                    <div class="recommendation-header">
+                        <h3 class="recommendation-title">Pastel de Carne</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            <span>(187)</span>
+                        </div>
+                    </div>
+                    <p class="recommendation-desc">Pastel crocante recheado com carne moída temperada. Um dos salgados mais pedidos pelos nossos clientes.</p>
+                </div>
+                <div class="recommendation-card">
+                    <div class="recommendation-header">
+                        <h3 class="recommendation-title">Churros com Chocolate</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <span>(203)</span>
+                        </div>
+                    </div>
+                    <p class="recommendation-desc">Para os amantes de chocolate! Churros recheado com chocolate belga cremoso e coberto com raspas de chocolate meio amargo.</p>
+                </div>
+                <div class="recommendation-card">
+                    <div class="recommendation-header">
+                        <h3 class="recommendation-title">Churros de Doce de Leite com Nozes</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <span>(156)</span>
+                        </div>
+                    </div>
+                    <p class="recommendation-desc">Nossa versão premium! Doce de leite artesanal com pedaços de nozes crocantes, criando uma experiência única de sabor e textura.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Panel Fixo -->
+    <button class="open-panel-btn" id="open-panel-btn" aria-label="Abrir painel de informações">
+        <i class="fas fa-info-circle"></i>
+    </button>
+    
+    <div class="info-panel" id="info-panel">
+        <div class="panel-header">
+            <h3>Informações Rápidas</h3>
+            <button class="close-panel" id="close-panel" aria-label="Fechar painel">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="panel-content">
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="info-text">
+                    <h4>Horário de Funcionamento</h4>
+                    <p>Segunda a Sexta: 16h às 19:30h</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="info-text">
+                    <h4>Delivery</h4>
+                    <p>Sem entregas</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-percent"></i>
+                </div>
+                <div class="info-text">
+                    <h4>Promoção Especial</h4>
+                    <p>Sem Ofertas Disponíveis</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contacts">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">D'<span>Schurros</span></a>
+                    <p>Desde 2025 levando o sabor autêntico dos churros artesanais para nossos clientes. Feitos com ingredientes selecionados e muito carinho, cada mordida é uma experiência única.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-contact">
+                    <h3 class="footer-title">Contato</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>Av. dos Churros, 123<br>Centro, São Paulo - SP</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>(11) 99979-6539</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div><a href="mailto:dschurros@gmail.com">dschurros@gmail.com</a></div>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <div>Segunda a Sexta: 16h-19:30h<br>Sábado e Domingo: Fechado</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 D'Schurros. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Corrigir variáveis RGB para transições suaves
+        document.documentElement.style.setProperty('--bg-color-rgb', '255, 255, 255');
+        document.documentElement.style.setProperty('--primary-color-rgb', '255, 107, 53');
+        document.documentElement.style.setProperty('--text-color-rgb', '51, 51, 51');
+        
+        // Toggle do modo escuro
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        const updateThemeVariables = (isDark) => {
+            if (isDark) {
+                document.documentElement.style.setProperty('--bg-color-rgb', '26, 26, 26');
+                document.documentElement.style.setProperty('--primary-color-rgb', '255, 140, 66');
+                document.documentElement.style.setProperty('--text-color-rgb', '245, 245, 245');
+            } else {
+                document.documentElement.style.setProperty('--bg-color-rgb', '255, 255, 255');
+                document.documentElement.style.setProperty('--primary-color-rgb', '255, 107, 53');
+                document.documentElement.style.setProperty('--text-color-rgb', '51, 51, 51');
+            }
+        };
+        
+        themeToggle.addEventListener('click', () => {
+            const isDark = !document.body.classList.contains('dark-mode');
+            document.body.classList.toggle('dark-mode');
+            updateThemeVariables(isDark);
+            
+            if (isDark) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Verificar preferência salva
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+            updateThemeVariables(true);
+        }
+        
+        // Menu móvel
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mainNav = document.getElementById('main-nav');
+        const menuIcon = mobileMenuBtn.querySelector('i');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            
+            if (mainNav.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+        
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+        
+        // Painel de informações - Corrigido
+        const openPanelBtn = document.getElementById('open-panel-btn');
+        const closePanelBtn = document.getElementById('close-panel');
+        const infoPanel = document.getElementById('info-panel');
+        
+        // Estado do painel
+        let panelVisible = false;
+        
+        const showPanel = () => {
+            infoPanel.classList.add('visible');
+            openPanelBtn.style.opacity = '0';
+            openPanelBtn.style.visibility = 'hidden';
+            panelVisible = true;
+        };
+        
+        const hidePanel = () => {
+            infoPanel.classList.remove('visible');
+            setTimeout(() => {
+                openPanelBtn.style.opacity = '1';
+                openPanelBtn.style.visibility = 'visible';
+                openPanelBtn.style.display = 'flex';
+            }, 300);
+            panelVisible = false;
+        };
+        
+        openPanelBtn.addEventListener('click', showPanel);
+        closePanelBtn.addEventListener('click', hidePanel);
+        
+        // Mostrar painel após 3 segundos (apenas na primeira visita)
+        if (!localStorage.getItem('panelShown')) {
+            setTimeout(() => {
+                showPanel();
+                localStorage.setItem('panelShown', 'true');
+            }, 3000);
+        }
+        
+        // Fechar painel ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (panelVisible && 
+                !infoPanel.contains(e.target) && 
+                !openPanelBtn.contains(e.target)) {
+                hidePanel();
+            }
+        });
+        
+        // Fechar painel com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && panelVisible) {
+                hidePanel();
+            }
+        });
+        
+        // Animações de entrada para elementos
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+        
+        // Observar elementos
+        document.querySelectorAll('.gallery-item, .recommendation-card').forEach(item => {
+            observer.observe(item);
+        });
+        
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Prevenir comportamento padrão de formulário
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => e.preventDefault());
+        });
+    </script>
+</body>
+</html>
