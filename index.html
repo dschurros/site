@@ -98,9 +98,15 @@
         }
 
         .logo-icon {
+            /* LOGO DA EMPRESA */
             color: var(--primary-color);
             font-size: 32px;
             transition: var(--transition);
+            min-width: 40px;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .logo-text {
@@ -198,6 +204,39 @@
         .mobile-menu-btn:hover {
             background-color: var(--primary-color);
             color: white;
+        }
+
+        /* Banner de Informações do Rodapé */
+        .footer-info-banner {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 0;
+            text-align: center;
+            font-weight: 500;
+            position: relative;
+            z-index: 5;
+        }
+
+        .footer-info-banner p {
+            font-size: 1rem;
+            margin: 0;
+            padding: 0 20px;
+        }
+
+        .footer-info-banner a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px dotted white;
+            transition: var(--transition);
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        .footer-info-banner a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-bottom-style: solid;
+            transform: translateY(-2px);
         }
 
         /* Hero Section */
@@ -474,7 +513,327 @@
             line-height: 1.7;
         }
 
-        /* Info Panel Fixo */
+        /* MURAL DE AVISOS */
+        .announcements {
+            padding: 100px 0;
+            background-color: var(--bg-color);
+        }
+
+        .announcements-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .announcement-card {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: 0 8px 20px var(--shadow);
+            transition: var(--transition);
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        .announcement-card:nth-child(1) { animation-delay: 0.1s; }
+        .announcement-card:nth-child(2) { animation-delay: 0.2s; }
+        .announcement-card:nth-child(3) { animation-delay: 0.3s; }
+        .announcement-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .announcement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow);
+            border-color: var(--primary-color);
+        }
+
+        .announcement-card.empty {
+            background-color: rgba(var(--primary-color-rgb), 0.05);
+            border: 2px dashed rgba(var(--primary-color-rgb), 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+
+        .announcement-card.empty .empty-text {
+            color: var(--text-light);
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .announcement-card.coming-soon {
+            background-color: rgba(var(--primary-color-rgb), 0.08);
+            border: 2px dashed var(--primary-color);
+        }
+
+        .announcement-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .announcement-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .announcement-content {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .announcement-date {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 5px 15px;
+            background-color: var(--accent-color);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        /* POPUP DO INSTAGRAM - Z-INDEX CORRIGIDO */
+        .instagram-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000; /* AUMENTADO PARA FICAR ACIMA DE TUDO */
+            animation: fadeIn 0.3s ease;
+        }
+
+        .instagram-popup.active {
+            display: flex;
+        }
+
+        .popup-content {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 400px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            transform: scale(0.9);
+            animation: popIn 0.5s 0.2s ease forwards;
+        }
+
+        .popup-header {
+            background: linear-gradient(45deg, #833AB4, #E1306C, #F77737);
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .popup-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .popup-header h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .popup-body {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .popup-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 3px solid var(--accent-color);
+        }
+
+        .popup-message {
+            color: var(--text-color);
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .popup-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(45deg, #833AB4, #E1306C, #F77737);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 6px 20px rgba(131, 58, 180, 0.3);
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .popup-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(131, 58, 180, 0.4);
+        }
+
+        .popup-btn i {
+            font-size: 20px;
+        }
+
+        .popup-timer {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        @keyframes popIn {
+            to {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* BARRA DO INSTAGRAM - Z-INDEX CORRIGIDO */
+        .instagram-banner {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            background: linear-gradient(45deg, #833AB4, #E1306C, #F77737);
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 2001; /* AUMENTADO PARA FICAR ACIMA DO INFO PANEL */
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: slideInUp 0.5s 10s forwards;
+            border-left: 5px solid #FFD700;
+        }
+
+        .instagram-banner.hidden {
+            transform: translateY(100px);
+            opacity: 0;
+            display: none;
+        }
+
+        .banner-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .banner-icon {
+            color: white;
+            font-size: 28px;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .banner-text {
+            color: white;
+            font-weight: 500;
+        }
+
+        .banner-text strong {
+            font-weight: 700;
+        }
+
+        .banner-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .banner-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .banner-link {
+            margin-left: 15px;
+            background: white;
+            color: #E1306C;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .banner-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Info Panel Fixo - Z-INDEX AJUSTADO */
         .info-panel {
             position: fixed;
             bottom: 30px;
@@ -483,7 +842,7 @@
             border-radius: var(--border-radius);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
             width: 320px;
-            z-index: 1000;
+            z-index: 2000; /* ABAIXO DO POPUP E BANNER DO INSTAGRAM */
             overflow: hidden;
             transform: translateY(100px) scale(0.9);
             opacity: 0;
@@ -603,7 +962,7 @@
             font-size: 28px;
             cursor: pointer;
             box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
-            z-index: 999;
+            z-index: 1999; /* ABAIXO DO INFO PANEL */
             transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             border: none;
             animation: pulse 2s infinite;
@@ -708,12 +1067,13 @@
             color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
             transition: var(--transition);
-            border-bottom: 1px dotted transparent;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+            padding-bottom: 2px;
         }
 
         .contact-info a:hover {
             color: var(--primary-color);
-            border-bottom-color: var(--primary-color);
+            border-bottom: 1px solid var(--primary-color);
         }
 
         .social-links {
@@ -784,6 +1144,17 @@
             }
         }
 
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
         /* Responsive Design */
         @media (max-width: 1200px) {
             .container {
@@ -820,6 +1191,12 @@
             .open-panel-btn {
                 right: 20px;
                 bottom: 20px;
+            }
+
+            .instagram-banner {
+                width: 300px;
+                right: 15px;
+                bottom: 15px;
             }
         }
 
@@ -873,12 +1250,13 @@
                 font-size: 2.2rem;
             }
 
-            .gallery, .recommendations {
+            .gallery, .recommendations, .announcements {
                 padding: 80px 0;
             }
 
             .gallery-container,
-            .recommendations-container {
+            .recommendations-container,
+            .announcements-container {
                 grid-template-columns: 1fr;
                 gap: 25px;
             }
@@ -893,6 +1271,13 @@
 
             .open-panel-btn {
                 right: 20px;
+                bottom: 20px;
+            }
+
+            .instagram-banner {
+                width: calc(100% - 40px);
+                right: 20px;
+                left: 20px;
                 bottom: 20px;
             }
         }
@@ -926,6 +1311,24 @@
 
             .info-panel {
                 bottom: 110px;
+            }
+
+            .instagram-banner {
+                padding: 12px 15px;
+                flex-wrap: wrap;
+            }
+
+            .banner-link {
+                margin-left: 0;
+                margin-top: 10px;
+                width: 100%;
+                text-align: center;
+                padding: 10px 20px;
+            }
+
+            .popup-content {
+                width: 95%;
+                max-width: 350px;
             }
         }
 
@@ -969,6 +1372,11 @@
     </style>
 </head>
 <body>
+    <!-- Banner de Informações -->
+    <div class="footer-info-banner">
+        <p>📌 <strong>Informações importantes</strong> estão disponíveis no <a href="#contacts">rodapé do site</a>. Clique para acessar diretamente!</p>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="container header-container">
@@ -983,7 +1391,8 @@
                 <ul>
                     <li><a href="#home">Início</a></li>
                     <li><a href="#gallery">Produtos</a></li>
-                    <li><a href="#recommendations">Recomendações</a></li>
+                    <li><a href="#recommendations">Mais Pedidos</a></li>
+                    <li><a href="#announcements">Avisos</a></li>
                     <li><a href="#contacts">Contato</a></li>
                 </ul>
             </nav>
@@ -1008,7 +1417,7 @@
                 <a href="#gallery" class="btn">Conheça Nossos Produtos <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="hero-image">
-                <img src="https://anamariareceitas.com.br/wp-content/uploads/2024/06/6022-1-768x512.jpg" alt="Churros deliciosos de doce de leite">
+                <img src="https://guiadacozinha.com.br/wp-content/uploads/2018/03/churros-com-chocolate.jpg" alt="Churros deliciosos de doce de leite e chocolate">
             </div>
         </div>
     </section>
@@ -1021,24 +1430,24 @@
             </div>
             <div class="gallery-container">
                 <div class="gallery-item">
-                    <img src="https://anamariareceitas.com.br/wp-content/uploads/2024/06/6022-1-768x512.jpg" alt="Churros de Doce de Leite" class="gallery-img">
+                    <img src="https://images.ctfassets.net/qfxflpv0atz9/rbfIIIOpsOBwxpIFdhQvg/c9b8bc438a3dd10a8f89653655c09cee/churros-chaves-header-1.jpg" alt="Churros de Doce de Leite" class="gallery-img">
                     <div class="gallery-info">
                         <h3>Churros de Doce de Leite</h3>
                         <p>Nossa especialidade! Churros crocantes recheados com doce de leite cremoso e caseiro, finalizados com açúcar e canela.</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://phygital-files.mercafacil.com/mercadobahniuk-bucket/uploads/produto/churros_qualisse_70g_ab1f2fa2-3eaf-4680-952a-def6a4e3d93b.jpg" alt="Churros Qualitá" class="gallery-img">
+                    <img src="https://guiadacozinha.com.br/wp-content/uploads/2018/03/churros-com-chocolate.jpg" alt="Churros com Chocolate" class="gallery-img">
                     <div class="gallery-info">
-                        <h3>Churros Qualitá</h3>
-                        <p>Churros de alta qualidade, feito com ingredientes selecionados. Perfeito para quem busca um sabor premium e textura única.</p>
+                        <h3>Churros com Chocolate</h3>
+                        <p>Churros recheados com chocolate belga cremoso, perfeitos para os amantes de chocolate. Uma verdadeira tentação.</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pastel" class="gallery-img">
+                    <img src="https://anamariareceitas.com.br/wp-content/uploads/2024/06/6022-1-768x512.jpg" alt="Pastéis" class="gallery-img">
                     <div class="gallery-info">
-                        <h3>Pastel Crocante</h3>
-                        <p>Pastel frito na hora, com massa fina e crocante. Disponível em diversos sabores doces e salgados.</p>
+                        <h3>Pastéis Crocantes</h3>
+                        <p>Pastéis fritos na hora com massa fina e crocante. Disponível nos sabores queijo e carne, perfeitos para acompanhar.</p>
                     </div>
                 </div>
             </div>
@@ -1084,17 +1493,113 @@
                 </div>
                 <div class="recommendation-card">
                     <div class="recommendation-header">
-                        <h3 class="recommendation-title">Churros de Doce de Leite com Nozes</h3>
+                        <h3 class="recommendation-title">Pastel de Queijo</h3>
                         <div class="stars">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             <span>(156)</span>
                         </div>
                     </div>
-                    <p class="recommendation-desc">Nossa versão premium! Doce de leite artesanal com pedaços de nozes crocantes, criando uma experiência única de sabor e textura.</p>
+                    <p class="recommendation-desc">Pastel recheado com queijo derretido, uma delícia simples que conquista pelo sabor autêntico e textura crocante.</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Mural de Avisos -->
+    <section class="announcements" id="announcements">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mural de Avisos</h2>
+            </div>
+            <div class="announcements-container">
+                <!-- Aviso 1: Em breve -->
+                <div class="announcement-card">
+                    <div class="announcement-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="announcement-title">Em Breve Novidades!</h3>
+                    <p class="announcement-content">
+                        Estamos preparando novidades incríveis para você! Em breve teremos novos sabores de churros, promoções especiais e muito mais. Fique de olho!
+                    </p>
+                    <span class="announcement-date"> Em Breve </span>
+                </div>
+
+                <!-- Aviso 2: Programação em breve -->
+                <div class="announcement-card coming-soon">
+                    <div class="announcement-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="announcement-title">Programação em Breve</h3>
+                    <p class="announcement-content">
+                        Em breve estará disponível aqui nossa programação completa com horários especiais e eventos. Aguarde mais informações!
+                    </p>
+                    <span class="announcement-date">Em preparação</span>
+                </div>
+
+                <!-- Aviso 3: Vazio -->
+                <div class="announcement-card empty">
+                    <div class="empty-text">
+                        <i class="fas fa-plus-circle" style="font-size: 2rem; margin-bottom: 10px; color: var(--primary-color);"></i>
+                        <p>Novo aviso em breve</p>
+                    </div>
+                </div>
+
+                <!-- Aviso 4: Vazio -->
+                <div class="announcement-card empty">
+                    <div class="empty-text">
+                        <i class="fas fa-plus-circle" style="font-size: 2rem; margin-bottom: 10px; color: var(--primary-color);"></i>
+                        <p>Novo aviso em breve</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POPUP DO INSTAGRAM -->
+    <div class="instagram-popup" id="instagram-popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3>Siga-nos no Instagram!</h3>
+                <button class="popup-close" id="popup-close" aria-label="Fechar popup">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="popup-body">
+                <img src="https://martech.org/wp-content/uploads/2016/12/instagram-logo-gradient3-ss-1920.jpg" 
+                     alt="Instagram Logo" 
+                     class="popup-image">
+                <p class="popup-message">
+                    Fique por dentro de todas as novidades, promoções exclusivas e veja nossos deliciosos churros artesanais! Siga nosso Instagram para não perder nada.
+                </p>
+                <!-- LINK DO INSTAGRAM -->
+                <a href="https://www.instagram.com/dschurros_?igsh=NnUxOGZ5aGluNzgz" class="popup-btn" target="_blank" id="popup-instagram-link">
+                    <i class="fab fa-instagram"></i> Seguir no Instagram
+                </a>
+                <div class="popup-timer" id="popup-timer">
+                    Fecha automaticamente em: <span id="timer-count">10</span> segundos
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra do Instagram (opcional) -->
+    <div class="instagram-banner" id="instagram-banner">
+        <div class="banner-content">
+            <div class="banner-icon">
+                <i class="fab fa-instagram"></i>
+            </div>
+            <div class="banner-text">
+                Siga-nos no <strong>Instagram</strong> para novidades!
+            </div>
+        </div>
+        <!-- LINK DO INSTAGRAM -->
+        <a href="https://www.instagram.com/dschurros_?igsh=NnUxOGZ5aGluNzgz" class="banner-link" target="_blank" id="instagram-link">
+            Seguir
+        </a>
+        <button class="banner-close" id="banner-close" aria-label="Fechar banner">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
 
     <!-- Info Panel Fixo -->
     <button class="open-panel-btn" id="open-panel-btn" aria-label="Abrir painel de informações">
@@ -1145,23 +1650,26 @@
             <div class="footer-container">
                 <div class="footer-about">
                     <a href="#" class="footer-logo">D'<span>Schurros</span></a>
-                    <p>Desde 2025 levando o sabor autêntico dos churros artesanais para nossos clientes. Feitos com ingredientes selecionados e muito carinho, cada mordida é uma experiência única.</p>
+                    <p>Desde 2023 levando o sabor autêntico dos churros artesanais para nossos clientes. Feitos com ingredientes selecionados e muito carinho, cada mordida é uma experiência única.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <!-- LINK DO INSTAGRAM -->
+                        <a href="https://www.instagram.com/dschurros_?igsh=NnUxOGZ5aGluNzgz" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <!-- LINK DO FACEBOOK -->
                         <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <!-- LINK DO WHATSAPP -->
+                        <a href="https://wa.me/5551997976539" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div class="footer-contact">
                     <h3 class="footer-title">Contato</h3>
                     <ul class="contact-info">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>Av. dos Churros, 123<br>Centro, São Paulo - SP</div>
-                        </li>
+                       
                         <li>
                             <i class="fas fa-phone"></i>
-                            <div>(11) 99979-6539</div>
+                            <div>
+                                <!-- LINK DO WHATSAPP -->
+                                <a href="https://wa.me/5551997976539" target="_blank">(51) 999797-6539</a>
+                            </div>
                         </li>
                         <li>
                             <i class="fas fa-envelope"></i>
@@ -1171,11 +1679,22 @@
                             <i class="fas fa-clock"></i>
                             <div>Segunda a Sexta: 16h-19:30h<br>Sábado e Domingo: Fechado</div>
                         </li>
+                        <li>
+                            <i class="fab fa-instagram"></i>
+                            <div>
+                                <!-- LINK DO INSTAGRAM -->
+                                <a href="https://www.instagram.com/dschurros_?igsh=NnUxOGZ5aGluNzgz" target="_blank">@dschurros_</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
                 <p>&copy; 2025 D'Schurros. Todos os direitos reservados.</p>
+                <!-- LINK PARA OS TERMOS DE USO -->
+                <p style="margin-top: 10px; font-size: 0.85rem;">
+                    <a href="Termos.html" style="color: rgba(255,255,255,0.7); text-decoration: underline;">Termos de Uso e Política de Privacidade</a>
+                </p>
             </div>
         </div>
     </footer>
@@ -1253,7 +1772,7 @@
             });
         });
         
-        // Painel de informações - Corrigido
+        // Painel de informações - AJUSTADO PARA FECHAR QUANDO O POPUP APARECER
         const openPanelBtn = document.getElementById('open-panel-btn');
         const closePanelBtn = document.getElementById('close-panel');
         const infoPanel = document.getElementById('info-panel');
@@ -1282,6 +1801,7 @@
         closePanelBtn.addEventListener('click', hidePanel);
         
         // Mostrar painel após 3 segundos (apenas na primeira visita)
+        // MAS FECHAR QUANDO O POPUP DO INSTAGRAM APARECER
         if (!localStorage.getItem('panelShown')) {
             setTimeout(() => {
                 showPanel();
@@ -1305,6 +1825,86 @@
             }
         });
         
+        // POPUP DO INSTAGRAM - NOVO COMPORTAMENTO
+        const instagramPopup = document.getElementById('instagram-popup');
+        const popupClose = document.getElementById('popup-close');
+        const popupTimerCount = document.getElementById('timer-count');
+        
+        // Timer para fechar automaticamente
+        let countdown = 10;
+        let countdownInterval;
+        
+        const startCountdown = () => {
+            countdownInterval = setInterval(() => {
+                countdown--;
+                popupTimerCount.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    closeInstagramPopup();
+                }
+            }, 1000);
+        };
+        
+        const showInstagramPopup = () => {
+            // FECHAR O PAINEL DE INFORMAÇÕES SE ESTIVER ABERTO
+            if (panelVisible) {
+                hidePanel();
+            }
+            
+            // Aguardar um pouco para garantir que o painel fechou
+            setTimeout(() => {
+                instagramPopup.classList.add('active');
+                startCountdown();
+            }, 500); // Aparece após 0.5 segundos
+        };
+        
+        const closeInstagramPopup = () => {
+            instagramPopup.classList.remove('active');
+            clearInterval(countdownInterval);
+            countdown = 10;
+            popupTimerCount.textContent = countdown;
+        };
+        
+        // Mostrar popup do Instagram - SEMPRE, mas com um pequeno delay
+        setTimeout(() => {
+            showInstagramPopup();
+        }, 2000); // Aparece após 2 segundos
+        
+        // Fechar popup
+        popupClose.addEventListener('click', closeInstagramPopup);
+        
+        // Fechar popup ao clicar fora
+        instagramPopup.addEventListener('click', (e) => {
+            if (e.target === instagramPopup) {
+                closeInstagramPopup();
+            }
+        });
+        
+        // Fechar popup com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && instagramPopup.classList.contains('active')) {
+                closeInstagramPopup();
+            }
+        });
+        
+        // BARRA DO INSTAGRAM
+        const instagramBanner = document.getElementById('instagram-banner');
+        const bannerClose = document.getElementById('banner-close');
+        
+        // Fechar barra do Instagram
+        bannerClose.addEventListener('click', () => {
+            instagramBanner.classList.add('hidden');
+            localStorage.setItem('bannerClosed', 'true');
+        });
+        
+        // Verificar se o usuário já fechou a barra antes
+        if (!localStorage.getItem('bannerClosed')) {
+            // Barra aparece 10 segundos depois do popup
+        } else {
+            // Se já fechou antes, não mostrar
+            instagramBanner.classList.add('hidden');
+        }
+        
         // Animações de entrada para elementos
         const observerOptions = {
             threshold: 0.1,
@@ -1320,7 +1920,7 @@
         }, observerOptions);
         
         // Observar elementos
-        document.querySelectorAll('.gallery-item, .recommendation-card').forEach(item => {
+        document.querySelectorAll('.gallery-item, .recommendation-card, .announcement-card').forEach(item => {
             observer.observe(item);
         });
         
@@ -1334,7 +1934,8 @@
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     const headerHeight = document.querySelector('header').offsetHeight;
-                    const targetPosition = targetElement.offsetTop - headerHeight;
+                    const bannerHeight = document.querySelector('.footer-info-banner').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - headerHeight - bannerHeight;
                     
                     window.scrollTo({
                         top: targetPosition,
@@ -1342,11 +1943,6 @@
                     });
                 }
             });
-        });
-        
-        // Prevenir comportamento padrão de formulário
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', (e) => e.preventDefault());
         });
     </script>
 </body>
