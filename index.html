@@ -2070,266 +2070,303 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Corrigir variáveis RGB para transições suaves
-        document.documentElement.style.setProperty('--bg-color-rgb', '255, 255, 255');
-        document.documentElement.style.setProperty('--primary-color-rgb', '255, 107, 53');
-        document.documentElement.style.setProperty('--text-color-rgb', '51, 51, 51');
+         <script>
+    // Corrigir variáveis RGB para transições suaves
+    document.documentElement.style.setProperty('--bg-color-rgb', '255, 255, 255');
+    document.documentElement.style.setProperty('--primary-color-rgb', '255, 107, 53');
+    document.documentElement.style.setProperty('--text-color-rgb', '51, 51, 51');
+    
+    // Toggle do modo escuro
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    const updateThemeVariables = (isDark) => {
+        if (isDark) {
+            document.documentElement.style.setProperty('--bg-color-rgb', '26, 26, 26');
+            document.documentElement.style.setProperty('--primary-color-rgb', '255, 140, 66');
+            document.documentElement.style.setProperty('--text-color-rgb', '245, 245, 245');
+        } else {
+            document.documentElement.style.setProperty('--bg-color-rgb', '255, 255, 255');
+            document.documentElement.style.setProperty('--primary-color-rgb', '255, 107, 53');
+            document.documentElement.style.setProperty('--text-color-rgb', '51, 51, 51');
+        }
+    };
+    
+    themeToggle.addEventListener('click', () => {
+        const isDark = !document.body.classList.contains('dark-mode');
+        document.body.classList.toggle('dark-mode');
+        updateThemeVariables(isDark);
         
-        // Toggle do modo escuro
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        const updateThemeVariables = (isDark) => {
-            if (isDark) {
-                document.documentElement.style.setProperty('--bg-color-rgb', '26, 26, 26');
-                document.documentElement.style.setProperty('--primary-color-rgb', '255, 140, 66');
-                document.documentElement.style.setProperty('--text-color-rgb', '245, 245, 245');
-            } else {
-                document.documentElement.style.setProperty('--bg-color-rgb', '255, 255, 255');
-                document.documentElement.style.setProperty('--primary-color-rgb', '255, 107, 53');
-                document.documentElement.style.setProperty('--text-color-rgb', '51, 51, 51');
-            }
-        };
-        
-        themeToggle.addEventListener('click', () => {
-            const isDark = !document.body.classList.contains('dark-mode');
-            document.body.classList.toggle('dark-mode');
-            updateThemeVariables(isDark);
-            
-            if (isDark) {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
-        });
-        
-        // Verificar preferência salva
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
+        if (isDark) {
             themeIcon.classList.remove('fa-moon');
             themeIcon.classList.add('fa-sun');
-            updateThemeVariables(true);
+            localStorage.setItem('theme', 'dark');
+        } else {
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+            localStorage.setItem('theme', 'light');
         }
+    });
+    
+    // Verificar preferência salva
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+        updateThemeVariables(true);
+    }
+    
+    // Menu móvel
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mainNav = document.getElementById('main-nav');
+    const menuIcon = mobileMenuBtn.querySelector('i');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+        mainNav.classList.toggle('active');
         
-        // Menu móvel
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mainNav = document.getElementById('main-nav');
-        const menuIcon = mobileMenuBtn.querySelector('i');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-            
-            if (mainNav.classList.contains('active')) {
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-times');
-            } else {
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-            }
-        });
-        
-        // Fechar menu ao clicar em um link
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('active');
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-            });
-        });
-        
-        // Painel de informações
-        const openPanelBtn = document.getElementById('open-panel-btn');
-        const closePanelBtn = document.getElementById('close-panel');
-        const infoPanel = document.getElementById('info-panel');
-        
-        // Estado do painel
-        let panelVisible = false;
-        
-        const showPanel = () => {
-            infoPanel.classList.add('visible');
-            openPanelBtn.style.opacity = '0';
-            openPanelBtn.style.visibility = 'hidden';
-            panelVisible = true;
-        };
-        
-        const hidePanel = () => {
-            infoPanel.classList.remove('visible');
-            setTimeout(() => {
-                openPanelBtn.style.opacity = '1';
-                openPanelBtn.style.visibility = 'visible';
-                openPanelBtn.style.display = 'flex';
-            }, 300);
-            panelVisible = false;
-        };
-        
-        openPanelBtn.addEventListener('click', showPanel);
-        closePanelBtn.addEventListener('click', hidePanel);
-        
-        // Mostrar painel após 3 segundos (apenas na primeira visita)
-        if (!localStorage.getItem('panelShown')) {
-            setTimeout(() => {
-                showPanel();
-                localStorage.setItem('panelShown', 'true');
-            }, 3000);
+        if (mainNav.classList.contains('active')) {
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-times');
+        } else {
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
         }
-        
-        // Fechar painel ao clicar fora
-        document.addEventListener('click', (e) => {
-            if (panelVisible && 
-                !infoPanel.contains(e.target) && 
-                !openPanelBtn.contains(e.target)) {
-                hidePanel();
-            }
+    });
+    
+    // Fechar menu ao clicar em um link
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            mainNav.classList.remove('active');
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
         });
-        
-        // Fechar painel com ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && panelVisible) {
-                hidePanel();
-            }
-        });
-        
-        // POPUP DO INSTAGRAM - SEMPRE VISÍVEL
-        const instagramPopup = document.getElementById('instagram-popup');
-        const popupClose = document.getElementById('popup-close');
-        const popupTimerCount = document.getElementById('timer-count');
-        
-        // Timer para fechar automaticamente (30 segundos)
-        let countdown = 10;
-        let countdownInterval;
-        
-        const startCountdown = () => {
-            countdownInterval = setInterval(() => {
-                countdown--;
-                popupTimerCount.textContent = countdown;
-                
-                if (countdown <= 0) {
-                    closeInstagramPopup();
-                }
-            }, 1000);
-        };
-        
-        const showInstagramPopup = () => {
-            // Verificar se o usuário não fechou manualmente
-            if (!localStorage.getItem('instagramPopupClosed')) {
-                instagramPopup.classList.remove('hidden');
-                startCountdown();
-            }
-        };
-        
-        const closeInstagramPopup = () => {
-            instagramPopup.classList.add('hidden');
+    });
+    
+    // Painel de informações
+    const openPanelBtn = document.getElementById('open-panel-btn');
+    const closePanelBtn = document.getElementById('close-panel');
+    const infoPanel = document.getElementById('info-panel');
+    
+    // Estado do painel
+    let panelVisible = false;
+    
+    const showPanel = () => {
+        infoPanel.classList.add('visible');
+        openPanelBtn.style.opacity = '0';
+        openPanelBtn.style.visibility = 'hidden';
+        panelVisible = true;
+    };
+    
+    const hidePanel = () => {
+        infoPanel.classList.remove('visible');
+        setTimeout(() => {
+            openPanelBtn.style.opacity = '1';
+            openPanelBtn.style.visibility = 'visible';
+            openPanelBtn.style.display = 'flex';
+        }, 300);
+        panelVisible = false;
+    };
+    
+    openPanelBtn.addEventListener('click', showPanel);
+    closePanelBtn.addEventListener('click', hidePanel);
+    
+    // Mostrar painel após 3 segundos (apenas na primeira visita)
+    if (!localStorage.getItem('panelShown')) {
+        setTimeout(() => {
+            showPanel();
+            localStorage.setItem('panelShown', 'true');
+        }, 3000);
+    }
+    
+    // Fechar painel ao clicar fora
+    document.addEventListener('click', (e) => {
+        if (panelVisible && 
+            !infoPanel.contains(e.target) && 
+            !openPanelBtn.contains(e.target)) {
+            hidePanel();
+        }
+    });
+    
+    // Fechar painel com ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && panelVisible) {
+            hidePanel();
+        }
+    });
+    
+    // POPUP DO INSTAGRAM - VERSÃO CORRIGIDA (10 SEGUNDOS)
+    const instagramPopup = document.getElementById('instagram-popup');
+    const popupClose = document.getElementById('popup-close');
+    const popupTimerCount = document.getElementById('timer-count');
+    
+    // Variáveis do timer (10 SEGUNDOS)
+    let countdown = 10;
+    let countdownInterval = null;
+    
+    // Função para iniciar o timer de 10 segundos
+    function startTimer() {
+        // Limpar timer anterior se existir
+        if (countdownInterval) {
             clearInterval(countdownInterval);
-            countdown = 10;
+        }
+        
+        // Resetar para 10 segundos
+        countdown = 10;
+        popupTimerCount.textContent = countdown;
+        
+        // Iniciar novo timer que conta de 10 até 0
+        countdownInterval = setInterval(() => {
+            countdown--;
             popupTimerCount.textContent = countdown;
-        };
+            
+            // Quando chegar a 0, fechar automaticamente
+            if (countdown <= 0) {
+                closeInstagramPopup();
+            }
+        }, 1000);
+    }
+    
+    // Função para mostrar o popup
+    function showInstagramPopup() {
+        // Verificar se o usuário não fechou manualmente
+        if (!localStorage.getItem('instagramPopupClosed')) {
+            instagramPopup.classList.remove('hidden');
+            instagramPopup.style.display = 'block';
+            instagramPopup.style.visibility = 'visible';
+            instagramPopup.style.opacity = '1';
+            startTimer();
+        }
+    }
+    
+    // Função para fechar o popup
+    function closeInstagramPopup() {
+        instagramPopup.classList.add('hidden');
+        instagramPopup.style.display = 'none';
         
-        const closeInstagramPopupPermanently = () => {
-            closeInstagramPopup();
-            localStorage.setItem('instagramPopupClosed', 'true');
-        };
+        // Limpar o timer
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+        }
         
-        // MOSTRAR POPUP SEMPRE QUE A PÁGINA CARREGAR
-        window.addEventListener('load', () => {
-            // Pequeno delay para garantir que tudo carregou
-            setTimeout(() => {
-                showInstagramPopup();
-            }, 1000);
-        });
-        
-        // Fechar popup quando clicar no botão de fechar
-        popupClose.addEventListener('click', closeInstagramPopupPermanently);
-        
-        // Fechar popup ao clicar fora
-        instagramPopup.addEventListener('click', (e) => {
-            if (e.target === instagramPopup) {
-                closeInstagramPopupPermanently();
+        // Resetar contador para 10 segundos
+        countdown = 10;
+        popupTimerCount.textContent = countdown;
+    }
+    
+    // Função para fechar permanentemente
+    function closeInstagramPopupPermanently() {
+        closeInstagramPopup();
+        localStorage.setItem('instagramPopupClosed', 'true');
+    }
+    
+    // MOSTRAR POPUP QUANDO A PÁGINA CARREGAR
+    window.addEventListener('load', function() {
+        // Pequeno delay para garantir que tudo carregou
+        setTimeout(function() {
+            showInstagramPopup();
+        }, 1000);
+    });
+    
+    // Fechar popup quando clicar no botão de fechar
+    popupClose.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeInstagramPopupPermanently();
+    });
+    
+    // Fechar popup ao clicar fora (mas não no botão do popup)
+    document.addEventListener('click', function(e) {
+        if (!instagramPopup.classList.contains('hidden') && 
+            !instagramPopup.contains(e.target) && 
+            e.target !== popupClose && 
+            !popupClose.contains(e.target)) {
+            closeInstagramPopupPermanently();
+        }
+    });
+    
+    // Fechar popup com ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !instagramPopup.classList.contains('hidden')) {
+            closeInstagramPopupPermanently();
+        }
+    });
+    
+    // Animações de entrada para elementos
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
             }
         });
-        
-        // Fechar popup com ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !instagramPopup.classList.contains('hidden')) {
-                closeInstagramPopupPermanently();
-            }
-        });
-        
-        // Animações de entrada para elementos
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
-                }
-            });
-        }, observerOptions);
-        
-        // Observar elementos
-        document.querySelectorAll('.gallery-item, .recommendation-card, .announcement-card, .pricing-table').forEach(item => {
-            observer.observe(item);
-        });
-        
-        // Smooth scroll para links internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    e.preventDefault();
-                    const headerHeight = document.querySelector('header').offsetHeight;
-                    const bannerHeight = document.querySelector('.footer-info-banner').offsetHeight;
-                    const targetPosition = targetElement.offsetTop - headerHeight - bannerHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Fechar menu móvel se estiver aberto
-                    if (mainNav.classList.contains('active')) {
-                        mainNav.classList.remove('active');
-                        menuIcon.classList.remove('fa-times');
-                        menuIcon.classList.add('fa-bars');
-                    }
-                }
-            });
-        });
-
-        // CORRIGIDO: Removida função de copiar PIX e substituída por redirecionamento simples
-        // Todos os links do PIX agora abrem o link da bio diretamente
-        document.addEventListener('DOMContentLoaded', function() {
-            const pixLinks = document.querySelectorAll('a[href*="linknabio.gg"]');
-            pixLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // Permitir que o link abra normalmente em nova aba
-                    // Não precisa de código adicional pois os links já têm target="_blank"
-                    console.log('Redirecionando para Link da Bio - InfiniPay');
-                });
-            });
-        });
-        
-        // Melhorar experiência em tablets
-        document.addEventListener('touchstart', function() {}, {passive: true});
-        
-        // Prevenir zoom duplo em elementos interativos em tablets
-        document.addEventListener('touchmove', function(e) {
-            if (e.scale !== 1) {
+    }, observerOptions);
+    
+    // Observar elementos
+    document.querySelectorAll('.gallery-item, .recommendation-card, .announcement-card, .pricing-table').forEach(item => {
+        observer.observe(item);
+    });
+    
+    // Smooth scroll para links internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
                 e.preventDefault();
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const bannerHeight = document.querySelector('.footer-info-banner').offsetHeight;
+                const targetPosition = targetElement.offsetTop - headerHeight - bannerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Fechar menu móvel se estiver aberto
+                if (mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                }
             }
-        }, { passive: false });
-    </script>
+        });
+    });
+
+    // CORRIGIDO: Removida função de copiar PIX e substituída por redirecionamento simples
+    // Todos os links do PIX agora abrem o link da bio diretamente
+    document.addEventListener('DOMContentLoaded', function() {
+        const pixLinks = document.querySelectorAll('a[href*="linknabio.gg"]');
+        pixLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Permitir que o link abra normalmente em nova aba
+                // Não precisa de código adicional pois os links já têm target="_blank"
+                console.log('Redirecionando para Link da Bio - InfiniPay');
+            });
+        });
+    });
+    
+    // Melhorar experiência em tablets
+    document.addEventListener('touchstart', function() {}, {passive: true});
+    
+    // Prevenir zoom duplo em elementos interativos em tablets
+    document.addEventListener('touchmove', function(e) {
+        if (e.scale !== 1) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    
+    // DEBUG: Para verificar se o timer está funcionando
+    console.log('Instagram Popup configurado para fechar em 10 segundos');
+</script>
+  
+  
 </body>
 </html>
