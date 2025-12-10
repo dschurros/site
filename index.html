@@ -1944,7 +1944,7 @@
                     <i class="fab fa-instagram"></i> Seguir no Instagram
                 </a>
                 <div class="popup-timer" id="popup-timer">
-                    Fecha automaticamente em: <span id="timer-count">10</span> segundos
+                    Fecha automaticamente em: <span id="timer-count">12</span> segundos
                 </div>
             </div>
         </div>
@@ -2218,7 +2218,7 @@
         const popupTimerCount = document.getElementById('timer-count');
         
         // Timer para fechar automaticamente
-        let countdown = 10;
+        let countdown = 12;
         let countdownInterval;
         
         const startCountdown = () => {
@@ -2245,7 +2245,7 @@
         const closeInstagramPopup = () => {
             instagramPopup.classList.remove('active');
             clearInterval(countdownInterval);
-            countdown = 10;
+            countdown = 12;
             popupTimerCount.textContent = countdown;
         };
         
