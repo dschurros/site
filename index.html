@@ -815,7 +815,7 @@
         /* POPUP DO INSTAGRAM - VERSÃO SIMPLIFICADA */
         .instagram-popup {
             position: fixed;
-            bottom: 30px;
+            bottom: 90px;
             right: 30px;
             width: 300px;
             background-color: var(--card-color);
@@ -829,103 +829,33 @@
             transition: all 0.5s ease;
         }
 
-        /* Mini card persistente que aparece após fechar o popup principal */
-        .mini-card {
+        /* Botão minimizado do popup (ícone) */
+        .popup-minimized-btn {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background-color: var(--card-color);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-            padding: 10px 14px;
-            z-index: 2002;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transform: translateY(20px) scale(0.95);
-            opacity: 0;
-            transition: all 0.35s ease;
-            border: 1px solid rgba(255,107,53,0.12);
-            visibility: hidden;
-        }
-
-        .mini-card.visible {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .mini-card .mini-text {
-            font-size: 0.95rem;
-            color: var(--text-color);
-        }
-
-        .mini-card .mini-action {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #833AB4, #E1306C, #F77737);
             color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        /* Modal do Mural (largura suficiente para imagens) */
-        .mural-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0,0,0,0.5);
-            z-index: 3000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            z-index: 2002;
+            cursor: pointer;
+            transform: translateY(10px) scale(0.95);
             opacity: 0;
             visibility: hidden;
             transition: all 0.25s ease;
+            border: 2px solid rgba(255,255,255,0.06);
         }
 
-        .mural-modal.visible {
+        .popup-minimized-btn.visible {
+            transform: translateY(0) scale(1);
             opacity: 1;
             visibility: visible;
-        }
-
-        .mural-modal .modal-content {
-            background: var(--card-color);
-            border-radius: 14px;
-            max-width: 720px; /* maior largura para imagens */
-            width: calc(100% - 40px);
-            padding: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-            border: 1px solid rgba(255,107,53,0.12);
-        }
-
-        .mural-modal .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .mural-modal .modal-body {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-
-        .mural-modal .mural-image-placeholder {
-            display: block;
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            object-fit: cover;
-            background: rgba(0,0,0,0.04);
-            padding: 24px;
-            text-align: center;
-            color: var(--text-light);
         }
 
         /* Reforça alinhamento dos links do cabeçalho */
@@ -1537,7 +1467,7 @@
                 <button class="theme-toggle" id="theme-toggle" aria-label="Alternar modo escuro/claro">
                     <i class="fas fa-moon"></i>
                 </button>
-                <button id="open-mural-btn" class="btn" style="padding:10px 14px; font-size:14px;">Mural</button>
+                <!-- botão do mural removido (pedido do usuário) -->
                 <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -1729,7 +1659,6 @@
         <div class="container">
             <div class="section-title" style="display:flex; align-items:center; justify-content:center; gap:12px;">
                 <h2>Mural de Avisos</h2>
-                <button class="btn" id="open-mural-from-section" style="padding:8px 12px; font-size:14px;">Abrir Mural</button>
             </div>
             <div class="announcements-container">
                 <!-- Aviso 1: Em breve -->
@@ -1750,10 +1679,11 @@
                         <i class="fas fa-calendar-alt"></i>
                     </div>
                     <h3 class="announcement-title">Programação e eventos</h3>
-                    <p class="announcement-content">
-                        Em breve disponibilizaremos nossa programação completa de eventos e horários especiais.
-                    </p>
-                    <span class="announcement-date">Em preparação</span>
+                        <p class="announcement-content">
+                            Em breve disponibilizaremos nossa programação completa de eventos e horários especiais.
+                        </p>
+                        <a href="programaçao.html" class="btn" style="margin-top: 12px; padding:8px 12px; font-size:14px; display:inline-flex; align-items:center; gap:8px;">Ver Programação <i class="fas fa-calendar-alt"></i></a>
+                        <span class="announcement-date">Em preparação</span>
                 </div>
 
                 <!-- Aviso 3: Chave PIX -->
@@ -1828,11 +1758,9 @@
         </div>
     </div>
     
-    <!-- Mini card (aparece quando o popup principal é fechado) -->
-    <div class="mini-card" id="mini-card" role="dialog" aria-label="Mini follow">
-        <div class="mini-text">Perdeu o popup? Siga-nos no Instagram!</div>
-        <button class="mini-action" id="mini-action">Reabrir</button>
-        <button class="mini-dismiss" id="mini-dismiss" aria-label="Fechar mini card" style="background:none;border:none;color:var(--text-light);margin-left:6px;font-size:16px;">&times;</button>
+    <!-- Botão minimizado que aparece quando o popup principal é fechado -->
+    <div class="popup-minimized-btn" id="popup-minimized-btn" role="button" aria-label="Reabrir popup Instagram" title="Abrir Instagram">
+        <i class="fab fa-instagram"></i>
     </div>
 
     <!-- Info Panel Fixo -->
@@ -1943,26 +1871,6 @@
         </div>
     </footer>
 
-        <!-- Modal do Mural (abre em cima da página) -->
-        <div class="mural-modal" id="mural-modal" role="dialog" aria-hidden="true">
-            <div class="modal-content" role="document">
-                <div class="modal-header">
-                    <h3>Mural de Avisos</h3>
-                    <button id="close-mural" class="close-panel" aria-label="Fechar mural"><i class="fas fa-times"></i></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mural-image-placeholder">
-                        <!-- Adicione aqui uma imagem do mural, recomendamos tamanho aproximado: 720x480px (proporção 3:2). -->
-                        <!-- Exemplo: <img src="/caminho/para/imagem.jpg" alt="Aviso" style="width:100%;border-radius:8px;"> -->
-                        Espaço para imagem do mural (adicione imagem conforme comentário acima).
-                    </div>
-                    <div>
-                        <p>Aqui vai o conteúdo do mural. Você pode colar HTML simples ou imagens.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
        <script>
     // ---------------------
     // TEMA ESCURO / CLARO
@@ -2069,8 +1977,8 @@
     function closePopup() {
         instagramPopup.classList.remove("visible");
         clearInterval(popupTimer);
-        // Sempre mostrar o mini-card quando o popup principal for fechado
-        try { showMiniCard(); } catch (err) { /* showMiniCard pode ser definido depois */ }
+        // mostrar botão minimizado quando o popup principal for fechado
+        try { showMinimizedButton(); } catch (err) { /* function pode ser definida depois */ }
     }
 
     // popup SEMPRE aparece
@@ -2085,59 +1993,30 @@
         if (e.key === "Escape") closePopup();
     });
 
-    // Mini-card: comportamento consistente quando o popup principal é fechado
-    const miniCard = document.getElementById('mini-card');
-    const miniAction = document.getElementById('mini-action');
-    const miniDismiss = document.getElementById('mini-dismiss');
+    // Botão minimizado: comportamento consistente quando o popup principal é fechado
+    const minimizedBtn = document.getElementById('popup-minimized-btn');
 
-    function showMiniCard() {
-        if (!miniCard) return;
-        miniCard.classList.add('visible');
+    function showMinimizedButton() {
+        if (!minimizedBtn) return;
+        minimizedBtn.classList.add('visible');
+        minimizedBtn.setAttribute('aria-hidden', 'false');
     }
 
-    function hideMiniCard() {
-        if (!miniCard) return;
-        miniCard.classList.remove('visible');
+    function hideMinimizedButton() {
+        if (!minimizedBtn) return;
+        minimizedBtn.classList.remove('visible');
+        minimizedBtn.setAttribute('aria-hidden', 'true');
     }
 
-    if (miniAction) {
-        miniAction.addEventListener('click', () => {
+    if (minimizedBtn) {
+        minimizedBtn.addEventListener('click', () => {
             // Reabre o popup principal e reinicia o timer
             popupTime = 10;
             instagramPopup.classList.add('visible');
             startPopupTimer();
-            hideMiniCard();
+            hideMinimizedButton();
         });
     }
-
-    if (miniDismiss) {
-        miniDismiss.addEventListener('click', () => {
-            hideMiniCard();
-        });
-    }
-
-    // Mural modal: abrir/fechar
-    const muralModal = document.getElementById('mural-modal');
-    const openMuralBtn = document.getElementById('open-mural-btn');
-    const openMuralFromSection = document.getElementById('open-mural-from-section');
-    const closeMural = document.getElementById('close-mural');
-
-    function openMural() {
-        if (!muralModal) return;
-        muralModal.classList.add('visible');
-        muralModal.setAttribute('aria-hidden', 'false');
-    }
-
-    function closeMuralFn() {
-        if (!muralModal) return;
-        muralModal.classList.remove('visible');
-        muralModal.setAttribute('aria-hidden', 'true');
-    }
-
-    if (openMuralBtn) openMuralBtn.addEventListener('click', openMural);
-    if (openMuralFromSection) openMuralFromSection.addEventListener('click', openMural);
-    if (closeMural) closeMural.addEventListener('click', closeMuralFn);
-    if (muralModal) muralModal.addEventListener('click', (e) => { if (e.target === muralModal) closeMuralFn(); });
 
     // ---------------------
     // SMOOTH SCROLL
