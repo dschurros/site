@@ -832,30 +832,47 @@
         /* Botão minimizado do popup (ícone) */
         .popup-minimized-btn {
             position: fixed;
-            bottom: 30px;
+            bottom: 90px;
             right: 30px;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
+            min-width: 48px;
+            height: 40px;
+            padding: 6px 10px;
+            border-radius: 999px;
             background: linear-gradient(45deg, #833AB4, #E1306C, #F77737);
             color: white;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-            z-index: 2002;
+            z-index: 1998; /* abaixo do painel de informações (2000) para evitar conflitos */
             cursor: pointer;
-            transform: translateY(10px) scale(0.95);
+            transform: translateY(10px) scale(0.98);
             opacity: 0;
             visibility: hidden;
             transition: all 0.25s ease;
             border: 2px solid rgba(255,255,255,0.06);
+            font-weight: 600;
+            font-size: 0.85rem;
         }
 
         .popup-minimized-btn.visible {
             transform: translateY(0) scale(1);
             opacity: 1;
             visibility: visible;
+        }
+
+        .popup-minimized-btn .pill-text {
+            color: white;
+            white-space: nowrap;
+            font-size: 0.85rem;
+            line-height: 1;
+        }
+
+        .popup-minimized-btn i {
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
         }
 
         /* Reforça alinhamento dos links do cabeçalho */
@@ -1758,9 +1775,10 @@
         </div>
     </div>
     
-    <!-- Botão minimizado que aparece quando o popup principal é fechado -->
-    <div class="popup-minimized-btn" id="popup-minimized-btn" role="button" aria-label="Reabrir popup Instagram" title="Abrir Instagram">
+    <!-- Pequeno botão/pill persistente: Siga-nos no Instagram -->
+    <div class="popup-minimized-btn" id="popup-minimized-btn" role="button" aria-label="Siga-nos no Instagram" title="Siga-nos no Instagram">
         <i class="fab fa-instagram"></i>
+        <span class="pill-text">Siga-nos no Instagram</span>
     </div>
 
     <!-- Info Panel Fixo -->
@@ -1977,8 +1995,7 @@
     function closePopup() {
         instagramPopup.classList.remove("visible");
         clearInterval(popupTimer);
-        // mostrar botão minimizado quando o popup principal for fechado
-        try { showMinimizedButton(); } catch (err) { /* function pode ser definida depois */ }
+        // não esconder o botão/pill; ele permanece visível permanentemente
     }
 
     // popup SEMPRE aparece
@@ -1993,28 +2010,17 @@
         if (e.key === "Escape") closePopup();
     });
 
-    // Botão minimizado: comportamento consistente quando o popup principal é fechado
+    // Botão/pill persistente: comportamento sempre visível e reabre o popup quando clicado
     const minimizedBtn = document.getElementById('popup-minimized-btn');
-
-    function showMinimizedButton() {
-        if (!minimizedBtn) return;
-        minimizedBtn.classList.add('visible');
-        minimizedBtn.setAttribute('aria-hidden', 'false');
-    }
-
-    function hideMinimizedButton() {
-        if (!minimizedBtn) return;
-        minimizedBtn.classList.remove('visible');
-        minimizedBtn.setAttribute('aria-hidden', 'true');
-    }
-
     if (minimizedBtn) {
+        // deixar visível ao carregar a página
+        minimizedBtn.classList.add('visible');
+
         minimizedBtn.addEventListener('click', () => {
-            // Reabre o popup principal e reinicia o timer
+            // Reabre o popup principal e reinicia o timer; não esconde o pill
             popupTime = 10;
             instagramPopup.classList.add('visible');
             startPopupTimer();
-            hideMinimizedButton();
         });
     }
 
