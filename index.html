@@ -1822,221 +1822,168 @@
         </div>
     </footer>
 
-    <script>
-        // CORREÇÕES PRINCIPAIS:
-        // 1. Removido bloqueio de scroll
-        // 2. Popup simplificado e funcional
-        // 3. Mobile totalmente funcional
+   <script>
+    // ---------------------
+    // TEMA ESCURO / CLARO
+    // ---------------------
+    const themeToggle = document.getElementById("theme-toggle");
+    const themeIcon = themeToggle.querySelector("i");
 
-        // Corrigir variáveis RGB
-        document.documentElement.style.setProperty('--bg-color-rgb', '255, 255, 255');
-        document.documentElement.style.setProperty('--primary-color-rgb', '255, 107, 53');
-        document.documentElement.style.setProperty('--text-color-rgb', '51, 51, 51');
-        
-        // Toggle do modo escuro
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        const updateThemeVariables = (isDark) => {
-            if (isDark) {
-                document.documentElement.style.setProperty('--bg-color-rgb', '26, 26, 26');
-                document.documentElement.style.setProperty('--primary-color-rgb', '255, 140, 66');
-                document.documentElement.style.setProperty('--text-color-rgb', '245, 245, 245');
-            } else {
-                document.documentElement.style.setProperty('--bg-color-rgb', '255, 255, 255');
-                document.documentElement.style.setProperty('--primary-color-rgb', '255, 107, 53');
-                document.documentElement.style.setProperty('--text-color-rgb', '51, 51, 51');
-            }
-        };
-        
-        themeToggle.addEventListener('click', () => {
-            const isDark = !document.body.classList.contains('dark-mode');
-            document.body.classList.toggle('dark-mode');
-            updateThemeVariables(isDark);
-            
-            if (isDark) {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
+    function updateThemeVars(isDark) {
+        if (isDark) {
+            document.documentElement.style.setProperty("--bg-color-rgb", "26,26,26");
+            document.documentElement.style.setProperty("--primary-color-rgb", "255,140,66");
+            document.documentElement.style.setProperty("--text-color-rgb", "245,245,245");
+        } else {
+            document.documentElement.style.setProperty("--bg-color-rgb", "255,255,255");
+            document.documentElement.style.setProperty("--primary-color-rgb", "255,107,53");
+            document.documentElement.style.setProperty("--text-color-rgb", "51,51,51");
+        }
+    }
+
+    themeToggle.addEventListener("click", () => {
+        const dark = !document.body.classList.contains("dark-mode");
+        document.body.classList.toggle("dark-mode");
+
+        updateThemeVars(dark);
+
+        if (dark) {
+            themeIcon.classList.replace("fa-moon", "fa-sun");
+            localStorage.setItem("theme", "dark");
+        } else {
+            themeIcon.classList.replace("fa-sun", "fa-moon");
+            localStorage.setItem("theme", "light");
+        }
+    });
+
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+        themeIcon.classList.replace("fa-moon", "fa-sun");
+        updateThemeVars(true);
+    }
+
+    // ---------------------
+    // MENU MOBILE
+    // ---------------------
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mainNav = document.getElementById("main-nav");
+    const menuIcon = mobileMenuBtn.querySelector("i");
+
+    mobileMenuBtn.addEventListener("click", () => {
+        mainNav.classList.toggle("active");
+        menuIcon.classList.toggle("fa-bars");
+        menuIcon.classList.toggle("fa-times");
+    });
+
+    document.querySelectorAll("nav a").forEach(link => {
+        link.addEventListener("click", () => {
+            mainNav.classList.remove("active");
+            menuIcon.classList.add("fa-bars");
+            menuIcon.classList.remove("fa-times");
         });
-        
-        // Verificar preferência salva
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-            updateThemeVariables(true);
-        }
-        
-        // Menu móvel SIMPLIFICADO
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mainNav = document.getElementById('main-nav');
-        const menuIcon = mobileMenuBtn.querySelector('i');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-            menuIcon.classList.toggle('fa-bars');
-            menuIcon.classList.toggle('fa-times');
-        });
-        
-        // Fechar menu ao clicar em um link
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('active');
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-            });
-        });
-        
-        // Painel de informações
-        const openPanelBtn = document.getElementById('open-panel-btn');
-        const closePanelBtn = document.getElementById('close-panel');
-        const infoPanel = document.getElementById('info-panel');
-        
-        let panelVisible = false;
-        
-        const showPanel = () => {
-            infoPanel.classList.add('visible');
-            openPanelBtn.style.opacity = '0';
-            openPanelBtn.style.visibility = 'hidden';
-            panelVisible = true;
-        };
-        
-        const hidePanel = () => {
-            infoPanel.classList.remove('visible');
-            openPanelBtn.style.opacity = '1';
-            openPanelBtn.style.visibility = 'visible';
-            panelVisible = false;
-        };
-        
-        openPanelBtn.addEventListener('click', showPanel);
-        closePanelBtn.addEventListener('click', hidePanel);
-        
-        // Mostrar painel após 3 segundos
-        if (!localStorage.getItem('panelShown')) {
-            setTimeout(() => {
-                showPanel();
-                localStorage.setItem('panelShown', 'true');
-            }, 3000);
-        }
-        
-        // POPUP DO INSTAGRAM - VERSÃO SIMPLIFICADA E FUNCIONAL
-        const instagramPopup = document.getElementById('instagram-popup');
-        const popupClose = document.getElementById('popup-close');
-        const popupTimerCount = document.getElementById('timer-count');
-        
-        let timerValue = 10;
-        let timer = null;
-        
-        // Função para iniciar o timer
-        function startPopupTimer() {
-            timerValue = 10;
-            popupTimerCount.textContent = timerValue;
-            
-            if (timer) clearInterval(timer);
-            
-            timer = setInterval(() => {
-                timerValue--;
-                popupTimerCount.textContent = timerValue;
-                
-                if (timerValue <= 0) {
-                    closePopup();
-                }
-            }, 1000);
-        }
-        
-        // Função para fechar o popup
-        function closePopup() {
-            instagramPopup.classList.remove('visible');
-            if (timer) {
-                clearInterval(timer);
-                timer = null;
-            }
-            localStorage.setItem('instagramPopupClosed', 'true');
-        }
-        
-        // Mostrar popup (se não foi fechado permanentemente)
-        if (!localStorage.getItem('instagramPopupClosed')) {
-            setTimeout(() => {
-                instagramPopup.classList.add('visible');
-                startPopupTimer();
-            }, 2000);
-        }
-        
-        // Fechar popup quando clicar no botão de fechar
-        popupClose.addEventListener('click', closePopup);
-        
-        // Fechar popup com ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && instagramPopup.classList.contains('visible')) {
+    });
+
+    // ---------------------
+    // PAINEL DE INFORMAÇÕES
+    // ---------------------
+    const openPanelBtn = document.getElementById("open-panel-btn");
+    const closePanelBtn = document.getElementById("close-panel");
+    const infoPanel = document.getElementById("info-panel");
+
+    openPanelBtn.addEventListener("click", () => {
+        infoPanel.classList.add("visible");
+        openPanelBtn.style.opacity = "0";
+        openPanelBtn.style.visibility = "hidden";
+    });
+
+    closePanelBtn.addEventListener("click", () => {
+        infoPanel.classList.remove("visible");
+        openPanelBtn.style.opacity = "1";
+        openPanelBtn.style.visibility = "visible";
+    });
+
+    // ---------------------
+    // POPUP DO INSTAGRAM (sempre aparece)
+    // ---------------------
+    const instagramPopup = document.getElementById("instagram-popup");
+    const popupClose = document.getElementById("popup-close");
+    const popupTimerCount = document.getElementById("timer-count");
+
+    let popupTime = 10;
+    let popupTimer;
+
+    function startPopupTimer() {
+        popupTimerCount.textContent = popupTime;
+
+        popupTimer = setInterval(() => {
+            popupTime--;
+            popupTimerCount.textContent = popupTime;
+
+            if (popupTime <= 0) {
                 closePopup();
             }
-        });
-        
-        // Smooth scroll para links internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    e.preventDefault();
-                    const headerHeight = document.querySelector('header').offsetHeight;
-                    const targetPosition = targetElement.offsetTop - headerHeight - 20;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Fechar menu móvel se estiver aberto
-                    if (mainNav.classList.contains('active')) {
-                        mainNav.classList.remove('active');
-                        menuIcon.classList.remove('fa-times');
-                        menuIcon.classList.add('fa-bars');
-                    }
-                }
+        }, 1000);
+    }
+
+    function closePopup() {
+        instagramPopup.classList.remove("visible");
+        clearInterval(popupTimer);
+    }
+
+    // popup SEMPRE aparece
+    setTimeout(() => {
+        instagramPopup.classList.add("visible");
+        startPopupTimer();
+    }, 2000);
+
+    popupClose.addEventListener("click", closePopup);
+
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") closePopup();
+    });
+
+    // ---------------------
+    // SMOOTH SCROLL
+    // ---------------------
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener("click", e => {
+            const id = a.getAttribute("href");
+            if (id === "#") return;
+
+            const target = document.querySelector(id);
+            if (!target) return;
+
+            e.preventDefault();
+            const headerHeight = document.querySelector("header").offsetHeight;
+
+            window.scrollTo({
+                top: target.offsetTop - headerHeight - 10,
+                behavior: "smooth",
             });
         });
+    });
 
-        // Animações de entrada para elementos
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
+    // ---------------------
+    // ANIMAÇÕES DE ENTRADA
+    // ---------------------
+    const observer = new IntersectionObserver(
+        entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
                 }
             });
-        }, observerOptions);
-        
-        // Observar elementos
-        document.querySelectorAll('.gallery-item, .recommendation-card, .announcement-card, .pricing-table').forEach(item => {
-            observer.observe(item);
-        });
-        
-        // Prevenir zoom duplo em mobile
-        document.addEventListener('touchmove', function(e) {
-            if (e.scale !== 1) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-        
-        // Log para debug
-        console.log('Site D\'Schurros carregado com sucesso!');
-        console.log('Scroll funcionando normalmente');
-        console.log('Popup configurado para 10 segundos');
-    </script>
+        },
+        { threshold: 0.1 }
+    );
+
+    document.querySelectorAll(
+        ".gallery-item, .recommendation-card, .announcement-card, .pricing-table"
+    ).forEach(el => observer.observe(el));
+
+    console.log("Script carregado corretamente.");
+</script>
+
 </body>
 </html>
