@@ -75,6 +75,20 @@
             padding: 0 20px;
         }
 
+        /* logo image sizing */
+        .logo-img, .footer-logo-img {
+            height: 44px;
+            max-height: 44px;
+            max-width: 220px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .logo-img { height: 36px; }
+            .footer-logo-img { height: 32px; }
+        }
+
         /* Header */
         header {
             background-color: var(--bg-color);
@@ -708,10 +722,7 @@
     <header>
         <div class="container header-container">
             <a href="index.html" class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-cookie-bite"></i>
-                </div>
-                <div class="logo-text">D'<span>Schurros</span></div>
+                <img src="imagens/diminua%20os%20trigos%20de.png" alt="D'Schurros" class="logo-img">
             </a>
 
             <div class="header-actions">
@@ -953,7 +964,7 @@
     <footer>
         <div class="container">
             <div class="footer-container">
-                <a href="index.html" class="footer-logo">D'<span>Schurros</span></a>
+                    <a href="index.html" class="footer-logo"><img src="imagens/diminua%20os%20trigos%20de.png" alt="D'Schurros" class="footer-logo-img"></a>
                 
                 <div class="footer-about">
                     <p>Churros artesanais feitos com ingredientes selecionados e muito carinho. Encontre-nos em Novo Hamburgo conforme nossa programação semanal.</p>

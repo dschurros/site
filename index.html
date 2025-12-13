@@ -1516,6 +1516,20 @@
             background-color: rgba(255, 107, 53, 0.3);
             color: var(--text-color);
         }
+
+        /* logo image sizing */
+        .logo-img, .footer-logo-img {
+            height: 44px;
+            max-height: 44px;
+            max-width: 220px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .logo-img { height: 36px; }
+            .footer-logo-img { height: 32px; }
+        }
     </style>
 </head>
 <body>
@@ -1528,10 +1542,7 @@
     <header>
         <div class="container header-container">
             <a href="#" class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-cookie-bite"></i>
-                </div>
-                <div class="logo-text">D'<span>Schurros</span></div>
+                <img src="imagens/diminua%20os%20trigos%20de.png" alt="D'Schurros" class="logo-img">
             </a>
 
             <nav id="main-nav">
@@ -1904,7 +1915,7 @@
         <div class="container">
             <div class="footer-container">
                 <div class="footer-about">
-                    <a href="#" class="footer-logo">D'<span>Schurros</span></a>
+                    <a href="#" class="footer-logo"><img src="imagens/diminua%20os%20trigos%20de.png" alt="D'Schurros" class="footer-logo-img"></a>
                     <p>Desde 2022 levando o sabor autêntico dos churros artesanais para nossos clientes. Feitos com ingredientes selecionados e muito carinho, cada mordida é uma experiência única.</p>
                     <div class="social-links">
                         <a href="https://www.instagram.com/dschurros_?igsh=NnUxOGZ5aGluNzgz" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>

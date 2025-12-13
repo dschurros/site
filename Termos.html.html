@@ -56,6 +56,20 @@
             padding: 0 20px;
         }
 
+        /* logo image sizing */
+        .logo-img, .footer-logo-img {
+            height: 44px;
+            max-height: 44px;
+            max-width: 220px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .logo-img { height: 36px; }
+            .footer-logo-img { height: 32px; }
+        }
+
         /* Header - igual ao seu site */
         header {
             background-color: var(--bg-color);
@@ -427,10 +441,7 @@
     <header>
         <div class="container header-container">
             <a href="index.html" class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-cookie-bite"></i>
-                </div>
-                <div class="logo-text">D'<span>Schurros</span></div>
+                <img src="imagens/diminua%20os%20trigos%20de.png" alt="D'Schurros" class="logo-img">
             </a>
             
             <a href="index.html" class="back-btn">
@@ -549,7 +560,7 @@
         <div class="container">
             <div class="footer-container">
                 <div class="footer-about">
-                    <a href="index.html" class="footer-logo">D'<span>Schurros</span></a>
+                    <a href="index.html" class="footer-logo"><img src="imagens/diminua%20os%20trigos%20de.png" alt="D'Schurros" class="footer-logo-img"></a>
                     <p>Churros artesanais feitos com ingredientes selecionados e muito carinho. Desde 2023 levando o sabor autêntico para nossos clientes.</p>
                     <p><strong>Este site é apenas para informações de catálogo, novidades e divulgação dos produtos.</strong></p>
                 </div>
