@@ -1599,11 +1599,6 @@
             .logo-img { height: 56px; width:56px; }
             .footer-logo-img { height: 36px; width:36px; }
         }
-        #main-nav ul {
-    display: flex;
-    gap: 20px; /* controla o espaçamento geral */
-                    }
-
     </style>
 </head>
 <body>
@@ -1620,39 +1615,45 @@
                 <div class="logo-text">D<span>schurros</span></div>
             </a>
 
-         <nav id="main-nav">
-    <ul>
+        <nav id="main-nav">
+    <ul style="display:flex; gap:18px;">
         <li>
-            <a href="#home">
-                <i class="fa-solid fa-house"></i> Início
+            <a href="#home" style="display:flex; align-items:center;">
+                <i class="fa-solid fa-house" style="margin-right:8px;"></i>
+                Início
             </a>
         </li>
 
         <li>
-            <a href="#announcements">
-                <i class="fa-solid fa-bullhorn"></i> Avisos
+            <a href="#announcements" style="display:flex; align-items:center;">
+                <i class="fa-solid fa-bullhorn" style="margin-right:8px;"></i>
+                Avisos
             </a>
         </li>
 
         <li>
-            <a href="#gallery">
-                <i class="fa-solid fa-box-open"></i> Produtos
+            <a href="#gallery" style="display:flex; align-items:center;">
+                <i class="fa-solid fa-box-open" style="margin-right:8px;"></i>
+                Produtos
             </a>
         </li>
 
         <li>
-            <a href="#contacts">
-                <i class="fa-solid fa-envelope"></i> Contato
+            <a href="#contacts" style="display:flex; align-items:center;">
+                <i class="fa-solid fa-envelope" style="margin-right:8px;"></i>
+                Contato
             </a>
         </li>
 
         <li>
-            <a href="https://linknabio.gg/dschurros" target="_blank">
-                <i class="fa-solid fa-qrcode"></i> Chave Pix
+            <a href="https://linknabio.gg/dschurros" target="_blank" style="display:flex; align-items:center;">
+                <i class="fa-solid fa-qrcode" style="margin-right:8px;"></i>
+                Chave Pix
             </a>
         </li>
     </ul>
 </nav>
+
 
 
             <div class="header-actions">
